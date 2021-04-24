@@ -26,7 +26,7 @@ def get_info(soup):
     genre = soup.select("div.subtext a:not([title])")
     country = soup.find_all('h4', class_='inline', string='Country:')[0].find_parent().text
     country = re.sub(r'(\n\|\n|\n)', ',', country)
-    country = ''.join(re.compile(r'(\w|:|,)').findall(country, 10, len(country)-1)).split(',')
+    country = re.findall('([A-Za-z]+)', country)[1:]
     countries += country
     years.append(year)
     genres += [i.text for i in genre]
